@@ -3,11 +3,11 @@
 CP I - **Java Advanced** aplicado em 18/03/2024.
 
 
-| ![](documentacao/fiap.jpg)               | **Java Advanced** |
-|------------------------------------------|-------------------|
-| **ALUNO:**                               | **TURMA:** 2TDSPF |
-| **PROFESSOR:** Benefrancis do Nascimento | 18/03/2024        |
-| **CP I**                      | ****              |
+| ![](documentacao/fiap.jpg)                                        | **Java Advanced** |
+|-------------------------------------------------------------------|-------------------|
+| **ALUNO:** Douglas Magalhães de Araújo, Gustavo Arguello Bertacci | **TURMA:** 2TDSPF |
+| **PROFESSOR:** Benefrancis do Nascimento                          | 18/03/2024        |
+| **CP I**                                                          | ****              |
 
 # Sumário
 
