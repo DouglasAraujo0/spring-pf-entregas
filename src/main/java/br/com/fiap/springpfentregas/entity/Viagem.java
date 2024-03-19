@@ -23,21 +23,86 @@ public class Viagem {
     @Column(name = "ID_VIAGEM")
     private Long id;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(
+            name = "TB_VIAGEM_PRODUTO",
+            joinColumns = {
+                    @JoinColumn(
+                            name = "VIAGEM",
+                            referencedColumnName = "ID_VIAGEM",
+                            foreignKey = @ForeignKey(
+                                    name = "FK_VIAGEM_PRODUTO"
+                            )
+                    )
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(
+                            name = "PRODUTO",
+                            referencedColumnName = "ID_PRODUTO",
+                            foreignKey = @ForeignKey(
+                                    name = "FK_PRODUTO_VIAGEM"
+                            )
+                    )
+            }
+    )
     private Set<Produto> produtos = new LinkedHashSet<>();
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(
+            name = "TB_VIAGEM_PASSAGEIRO",
+            joinColumns = {
+                    @JoinColumn(
+                            name = "VIAGEM",
+                            referencedColumnName = "ID_VIAGEM",
+                            foreignKey = @ForeignKey(
+                                    name = "FK_VIAGEM_PASSAGEIRO"
+                            )
+                    )
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(
+                            name = "PASSAGEIRO",
+                            referencedColumnName = "ID_PASSAGEIRO",
+                            foreignKey = @ForeignKey(
+                                    name = "FK_PASSAGEIRO_VIAGEM"
+                            )
+                    )
+            }
+    )
     private Set<Passageiro> passageiros = new LinkedHashSet<>();
 
-    private cliente;
-    private origem;
-    private destino;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(
+            name = "PESSOA",
+            referencedColumnName = "ID_PESSOA",
+            foreignKey = @ForeignKey(
+                    name = "FK_VIAGEM_PESSOA"
+            )
+    )
+    private Pessoa cliente;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(
+            name = "ENDERECO_ORIGEM",
+            referencedColumnName = "ID_ENDERECO",
+            foreignKey = @ForeignKey(
+                    name = "FK_ENDERECO_ORIGEM_PESSOA"
+            )
+    )
+    private Endereco origem;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(
+            name = "ENDERECO_DESTINO",
+            referencedColumnName = "ID_ENDERECO",
+            foreignKey = @ForeignKey(
+                    name = "FK_ENDERECO_DESTINO_PESSOA"
+            )
+    )
+
+    private Endereco destino;
 
     private LocalDateTime saida;
 
     private LocalDateTime chegada;
-
-
-
-
-
-
 }

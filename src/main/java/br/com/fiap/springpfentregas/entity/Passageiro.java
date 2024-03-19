@@ -20,11 +20,13 @@ public class Passageiro {
     @Column(name = "ID_PASSAGEIRO")
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(
-            name = "TB_PESSOA_ENDERECO",
-            referencedColumnName = "ID_PESSOA_ENDERECO",
-            foreignKey = @ForeignKey(name = "FK_PESSOA_ENDERECO")
+            name = "PESSOA",
+            referencedColumnName = "ID_PESSOA",
+            foreignKey = @ForeignKey(
+                    name = "FK_PASSAGEIRO_PESSOA"
+            )
     )
 
     private Pessoa pessoa;

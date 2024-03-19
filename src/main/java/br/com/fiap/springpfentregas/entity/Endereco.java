@@ -28,11 +28,13 @@ public class Endereco {
     @Column(name = "COMP_DEPOSITO")
     private String complemento;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(
-            name = "TB_PESSOA_ENDERECO",
-            referencedColumnName = "ID_PESSOA_ENDERECO",
-            foreignKey = @ForeignKey(name = "FK_PESSOA_ENDERECO")
+            name = "PESSOA",
+            referencedColumnName = "ID_PESSOA",
+            foreignKey = @ForeignKey(
+                    name = "FK_ENDERECO_PESSOA"
+            )
     )
 
     private Pessoa pessoa;
