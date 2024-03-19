@@ -51,7 +51,6 @@ public class Viagem {
     private List<Produto> produtos = new ArrayList<>();
 
 
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "TB_PASSAGEIROS",
@@ -77,6 +76,7 @@ public class Viagem {
     )
     private Set<Passageiro> passageiros = new LinkedHashSet<>();
 
+
     @OneToOne
     @JoinColumn(
             name = "ID_CLIENTE",
@@ -85,6 +85,7 @@ public class Viagem {
     )
     private Pessoa cliente;
 
+
     @ManyToOne
     @JoinColumn(
             name = "ID_ORIGEM",
@@ -92,6 +93,7 @@ public class Viagem {
             foreignKey = @ForeignKey(name = "FK_VIAGEM_ORIGEM")
     )
     private Endereco origem;
+
 
     @ManyToOne
     @JoinColumn(name = "ID_DESTINO",
