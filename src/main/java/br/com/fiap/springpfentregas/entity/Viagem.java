@@ -48,7 +48,7 @@ public class Viagem {
                     )
             }
     )
-    private List<Produto> produtos = new ArrayList<>();
+    private Set<Produto> produtos = new LinkedHashSet<>();
 
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -77,11 +77,11 @@ public class Viagem {
     private Set<Passageiro> passageiros = new LinkedHashSet<>();
 
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(
-            name = "ID_CLIENTE",
+            name = "CLIENTE",
             referencedColumnName = "ID_PESSOA",
-            foreignKey = @ForeignKey(name = "FK_VIAGEM_CLIENTE")
+            foreignKey = @ForeignKey (name = "FK_VIAGEM_PESSOA")
     )
     private Pessoa cliente;
 
@@ -102,9 +102,9 @@ public class Viagem {
     )
     private Endereco destino;
 
-    @Column(name =  "SAIDA")
+    @Column(name = "SAIDA_VIAGEM")
     private LocalDateTime saida;
 
-    @Column(name =  "CHEGADA")
+    @Column(name = "CHEGADA_VIAGEM")
     private LocalDateTime chegada;
 }

@@ -16,6 +16,7 @@ public class ViagemResource {
 
     @Autowired
     private ViagemRepository repo;
+
     @GetMapping
     public List<Viagem> findAll() {
         return repo.findAll();

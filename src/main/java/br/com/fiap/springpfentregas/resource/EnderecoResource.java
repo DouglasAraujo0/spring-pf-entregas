@@ -36,7 +36,6 @@ public class EnderecoResource {
                 id.add( obj.getId());
             }
         }
-
         return repo.findAllById(id);
     }
 
@@ -54,6 +53,5 @@ public class EnderecoResource {
         end.setId(null);
 
         return repo.save(end);
-
     }
 }

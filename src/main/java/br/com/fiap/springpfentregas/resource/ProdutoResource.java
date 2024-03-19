@@ -16,6 +16,7 @@ public class ProdutoResource {
 
     @Autowired
     private ProdutoRepository repo;
+
     @GetMapping
     public List<Produto> findAll() {
         return repo.findAll();
@@ -33,6 +34,5 @@ public class ProdutoResource {
         produto.setId(null);
 
         return repo.save(produto);
-
     }
 }

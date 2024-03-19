@@ -15,6 +15,7 @@ public class PassageiroResource {
 
     @Autowired
     private PassageiroRepository repo;
+
     @GetMapping
     public List<Passageiro> findAll() {
         return repo.findAll();
@@ -32,6 +33,5 @@ public class PassageiroResource {
         passageiro.setId(null);
 
         return repo.save(passageiro);
-
     }
 }

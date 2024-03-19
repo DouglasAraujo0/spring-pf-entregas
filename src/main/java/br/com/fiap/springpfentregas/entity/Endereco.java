@@ -36,6 +36,5 @@ public class Endereco {
                     name = "FK_ENDERECO_PESSOA"
             )
     )
-
     private Pessoa pessoa;
 }

@@ -15,6 +15,7 @@ public class PessoaResource {
 
     @Autowired
     private PessoaRepository repo;
+
     @GetMapping
     public List<Pessoa> findAll() {
         return repo.findAll();
