@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -25,14 +27,15 @@ public class Viagem {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
-            name = "TB_VIAGEM_PRODUTO",
+            name = "TB_CP_PRODUTOS",
             joinColumns = {
                     @JoinColumn(
                             name = "VIAGEM",
                             referencedColumnName = "ID_VIAGEM",
                             foreignKey = @ForeignKey(
-                                    name = "FK_VIAGEM_PRODUTO"
+                                    name = "FK_PRODUTOS_VIAGEM"
                             )
+
                     )
             },
             inverseJoinColumns = {
@@ -40,22 +43,24 @@ public class Viagem {
                             name = "PRODUTO",
                             referencedColumnName = "ID_PRODUTO",
                             foreignKey = @ForeignKey(
-                                    name = "FK_PRODUTO_VIAGEM"
+                                    name = "FK_VIAGEM_PRODUTOS"
                             )
                     )
             }
     )
-    private Set<Produto> produtos = new LinkedHashSet<>();
+    private List<Produto> produtos = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
-            name = "TB_VIAGEM_PASSAGEIRO",
+            name = "TB_CP_PASSAGEIROS",
             joinColumns = {
                     @JoinColumn(
                             name = "VIAGEM",
                             referencedColumnName = "ID_VIAGEM",
                             foreignKey = @ForeignKey(
-                                    name = "FK_VIAGEM_PASSAGEIRO"
+                                    name = "FK_PASSAGEIRO_VIAGEM"
                             )
                     )
             },
@@ -64,45 +69,33 @@ public class Viagem {
                             name = "PASSAGEIRO",
                             referencedColumnName = "ID_PASSAGEIRO",
                             foreignKey = @ForeignKey(
-                                    name = "FK_PASSAGEIRO_VIAGEM"
+                                    name = "FK_VIAGEM_PASSAGEIRO"
                             )
                     )
             }
+
     )
     private Set<Passageiro> passageiros = new LinkedHashSet<>();
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne
     @JoinColumn(
-            name = "PESSOA",
+            name = "ID_CLIENTE",
             referencedColumnName = "ID_PESSOA",
-            foreignKey = @ForeignKey(
-                    name = "FK_VIAGEM_PESSOA"
-            )
+            foreignKey = @ForeignKey(name = "FK_VIAGEM_CLIENTE")
     )
     private Pessoa cliente;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(
-            name = "ENDERECO_ORIGEM",
-            referencedColumnName = "ID_ENDERECO",
-            foreignKey = @ForeignKey(
-                    name = "FK_ENDERECO_ORIGEM_PESSOA"
-            )
-    )
+    @ManyToOne
+    @JoinColumn(name = "ID_ORIGEM", referencedColumnName = "ID_ENDERECO", foreignKey = @ForeignKey(name = "FK_VIAGEM_ORIGEM"))
     private Endereco origem;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(
-            name = "ENDERECO_DESTINO",
-            referencedColumnName = "ID_ENDERECO",
-            foreignKey = @ForeignKey(
-                    name = "FK_ENDERECO_DESTINO_PESSOA"
-            )
-    )
-
+    @ManyToOne
+    @JoinColumn(name = "ID_DESTINO", referencedColumnName = "ID_ENDERECO", foreignKey = @ForeignKey(name = "FK_VIAGEM_DESTINO"))
     private Endereco destino;
 
+    @Column(name =  "SAIDA")
     private LocalDateTime saida;
 
+    @Column(name =  "CHEGADA")
     private LocalDateTime chegada;
 }

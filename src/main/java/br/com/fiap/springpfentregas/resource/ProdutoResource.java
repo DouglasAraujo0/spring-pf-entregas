@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/produto")
@@ -15,7 +16,6 @@ public class ProdutoResource {
 
     @Autowired
     private ProdutoRepository repo;
-
     @GetMapping
     public List<Produto> findAll() {
         return repo.findAll();
@@ -23,12 +23,16 @@ public class ProdutoResource {
 
     @GetMapping(value = "/{id}")
     public Produto findById(@PathVariable Long id) {
-        return repo.findById(id).orElseThrow();
+        return repo.findById( id ).orElseThrow();
     }
 
     @Transactional
     @PostMapping
-    public Produto save(@RequestBody Produto produto) {
-        return repo.save( produto );
+    public Produto save(@RequestBody Produto p) {
+        if(Objects.isNull(p)) return null;
+        p.setId(null);
+
+        return repo.save(p);
+
     }
 }

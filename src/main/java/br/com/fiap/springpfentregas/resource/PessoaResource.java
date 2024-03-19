@@ -7,13 +7,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/pessoa")
 public class PessoaResource {
+
     @Autowired
     private PessoaRepository repo;
-
     @GetMapping
     public List<Pessoa> findAll() {
         return repo.findAll();
@@ -21,12 +22,16 @@ public class PessoaResource {
 
     @GetMapping(value = "/{id}")
     public Pessoa findById(@PathVariable Long id) {
-        return repo.findById(id).orElseThrow();
+        return repo.findById( id ).orElseThrow();
     }
 
     @Transactional
     @PostMapping
-    public Pessoa save(@RequestBody Pessoa pessoa ) {
-        return repo.save( pessoa );
+    public Pessoa save(@RequestBody Pessoa p) {
+        if(Objects.isNull(p)) return null;
+        p.setId(null);
+
+        return repo.save(p);
+
     }
 }
