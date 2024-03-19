@@ -28,11 +28,11 @@ public class ProdutoResource {
 
     @Transactional
     @PostMapping
-    public Produto save(@RequestBody Produto p) {
-        if(Objects.isNull(p)) return null;
-        p.setId(null);
+    public Produto save(@RequestBody Produto produto) {
+        if(Objects.isNull(produto)) return null;
+        produto.setId(null);
 
-        return repo.save(p);
+        return repo.save(produto);
 
     }
 }

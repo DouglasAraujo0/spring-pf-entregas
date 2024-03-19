@@ -27,11 +27,11 @@ public class PessoaResource {
 
     @Transactional
     @PostMapping
-    public Pessoa save(@RequestBody Pessoa p) {
-        if(Objects.isNull(p)) return null;
-        p.setId(null);
+    public Pessoa save(@RequestBody Pessoa pessoa) {
+        if(Objects.isNull(pessoa)) return null;
+        pessoa.setId(null);
 
-        return repo.save(p);
+        return repo.save(pessoa);
 
     }
 }

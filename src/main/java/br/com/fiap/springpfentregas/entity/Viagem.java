@@ -27,7 +27,7 @@ public class Viagem {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
-            name = "TB_CP_PRODUTOS",
+            name = "TB_PRODUTOS",
             joinColumns = {
                     @JoinColumn(
                             name = "VIAGEM",
@@ -54,7 +54,7 @@ public class Viagem {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
-            name = "TB_CP_PASSAGEIROS",
+            name = "TB_PASSAGEIROS",
             joinColumns = {
                     @JoinColumn(
                             name = "VIAGEM",
@@ -86,11 +86,18 @@ public class Viagem {
     private Pessoa cliente;
 
     @ManyToOne
-    @JoinColumn(name = "ID_ORIGEM", referencedColumnName = "ID_ENDERECO", foreignKey = @ForeignKey(name = "FK_VIAGEM_ORIGEM"))
+    @JoinColumn(
+            name = "ID_ORIGEM",
+            referencedColumnName = "ID_ENDERECO",
+            foreignKey = @ForeignKey(name = "FK_VIAGEM_ORIGEM")
+    )
     private Endereco origem;
 
     @ManyToOne
-    @JoinColumn(name = "ID_DESTINO", referencedColumnName = "ID_ENDERECO", foreignKey = @ForeignKey(name = "FK_VIAGEM_DESTINO"))
+    @JoinColumn(name = "ID_DESTINO",
+            referencedColumnName = "ID_ENDERECO",
+            foreignKey = @ForeignKey(name = "FK_VIAGEM_DESTINO")
+    )
     private Endereco destino;
 
     @Column(name =  "SAIDA")

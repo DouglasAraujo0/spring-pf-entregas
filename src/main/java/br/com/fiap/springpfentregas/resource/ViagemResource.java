@@ -28,10 +28,10 @@ public class ViagemResource {
 
     @Transactional
     @PostMapping
-    public Viagem save(@RequestBody Viagem v) {
-        if (Objects.isNull(v)) return null;
-        v.setId( null );
+    public Viagem save(@RequestBody Viagem viagem) {
+        if (Objects.isNull(viagem)) return null;
+        viagem.setId( null );
 
-        return repo.save( v );
+        return repo.save( viagem );
     }
 }

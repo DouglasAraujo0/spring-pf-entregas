@@ -27,11 +27,11 @@ public class PassageiroResource {
 
     @Transactional
     @PostMapping
-    public Passageiro save(@RequestBody Passageiro p) {
-        if(Objects.isNull(p)) return null;
-        p.setId(null);
+    public Passageiro save(@RequestBody Passageiro passageiro) {
+        if(Objects.isNull(passageiro)) return null;
+        passageiro.setId(null);
 
-        return repo.save(p);
+        return repo.save(passageiro);
 
     }
 }

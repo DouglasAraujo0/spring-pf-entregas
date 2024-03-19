@@ -20,7 +20,7 @@ public class EnderecoResource {
     private EnderecoRepository repo;
 
     @Autowired
-    private PessoaRepository repoPessoa;
+    private PessoaRepository repoP;
 
     @GetMapping
     public List<Endereco> findAll() {
@@ -42,18 +42,18 @@ public class EnderecoResource {
 
     @GetMapping(value = "/pessoa/{idPessoa}")
     public Endereco findByIdPessoa(@PathVariable Long idPessoa) {
-        Pessoa pessoa = repoPessoa.findById(idPessoa).orElseThrow();
+        Pessoa pessoa = repoP.findById(idPessoa).orElseThrow();
         return repo.findById(pessoa.getId()).orElseThrow();
 
     }
 
     @Transactional
     @PostMapping
-    public Endereco save(@RequestBody Endereco p) {
-        if(Objects.isNull(p)) return null;
-        p.setId(null);
+    public Endereco save(@RequestBody Endereco end) {
+        if(Objects.isNull(end)) return null;
+        end.setId(null);
 
-        return repo.save(p);
+        return repo.save(end);
 
     }
 }

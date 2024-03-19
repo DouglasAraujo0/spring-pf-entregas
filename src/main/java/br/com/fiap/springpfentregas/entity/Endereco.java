@@ -19,13 +19,13 @@ public class Endereco {
     @Column(name = "ID_ENDERECO")
     private Long id;
 
-    @Column(name = "CEP_DEPOSITO")
+    @Column(name = "CEP_ENDERECO")
     private String cep;
 
     @Column(name = "NUM_ENDERECO")
     private String numero;
 
-    @Column(name = "COMP_DEPOSITO")
+    @Column(name = "COMP_ENDERECO")
     private String complemento;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
